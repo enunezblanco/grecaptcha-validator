@@ -75,22 +75,23 @@ class Response
     /**
      * Create a new response instance.
      *
-     * @param  array  $data
+     * @param  string  $data
      * @return Response
      */
-    public static function valueOf(array $data): Response
+    public static function valueOf(string $data): Response
     {
-        $response = new Response($data['success']);
-        if (isset($data['challenge_ts'])) {
-            $response->setTimestamp($data['challenge_ts']);
+        $array = json_decode($data, true);
+        $response = new Response($array['success']);
+        if (isset($array['challenge_ts'])) {
+            $response->setTimestamp($array['challenge_ts']);
         }
 
-        if (isset($data['challenge_ts'])) {
-            $response->setHostname($data['hostname']);
+        if (isset($array['challenge_ts'])) {
+            $response->setHostname($array['hostname']);
         }
 
-        if (isset($data['error-codes'])) {
-            $response->setErrorsCode($data['error-codes']);
+        if (isset($array['error-codes'])) {
+            $response->setErrorsCode($array['error-codes']);
         }
         return $response;
     }

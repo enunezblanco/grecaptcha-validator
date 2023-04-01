@@ -3,6 +3,7 @@
 namespace Recaptcha;
 
 use Recaptcha\Http\Client;
+use Recaptcha\Http\Response;
 
 class Captcha
 {
@@ -74,7 +75,7 @@ class Captcha
     private function validate(): void
     {
         $this->errorCodes = [];
-        $response = $this->client->sendRequest($this->token);
+        $response = Response::valueOf($this->client->sendRequest($this->token));
         $this->status = $response->isSuccessful();
         if (!$this->status) {
             $this->parseErrorCodes($response->errorCodes());
@@ -92,5 +93,13 @@ class Captcha
         foreach ($codes as $value) {
             $this->errorCodes[] = strtoupper(str_replace('-', '_', $value));
         }
+    }
+
+    public static function getInstanceOf(string $sharedKey, string $responseToken, string $remoteIp = null): Captcha
+    {
+        return new Captcha(
+            new Token($sharedKey, $responseToken, $remoteIp),
+            new Client('https://www.google.com/recaptcha/api/siteverify')
+        );
     }
 }

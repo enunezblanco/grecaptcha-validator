@@ -50,6 +50,14 @@ class Token
         $this->secret = $secret;
     }
 
+    /**
+     * @return string
+     */
+    public function secret(): string
+    {
+        return $this->secret;
+    }
+
     private function setResponse(string $response): void
     {
         if (empty($response)) {
@@ -59,6 +67,15 @@ class Token
         $this->responseToken = $response;
     }
 
+    /**
+     * @return string
+     */
+    public function responseToken(): string
+    {
+        return $this->responseToken;
+    }
+
+
     private function setRemoteIp(string $remoteIp): void
     {
         if (!is_null($remoteIp) && !filter_var($remoteIp, FILTER_VALIDATE_IP)) {
@@ -66,4 +83,13 @@ class Token
         }
         $this->remoteIp = $remoteIp;
     }
+
+    /**
+     * @return string
+     */
+    public function remoteIp(): string
+    {
+        return $this->remoteIp;
+    }
+
 }
