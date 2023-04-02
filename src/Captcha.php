@@ -94,12 +94,4 @@ class Captcha
             $this->errorCodes[] = strtoupper(str_replace('-', '_', $value));
         }
     }
-
-    public static function getInstanceOf(string $sharedKey, string $responseToken, string $remoteIp = null): Captcha
-    {
-        return new Captcha(
-            new Token($sharedKey, $responseToken, $remoteIp),
-            new Client('https://www.google.com/recaptcha/api/siteverify')
-        );
-    }
 }

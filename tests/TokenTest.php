@@ -14,7 +14,7 @@ class TokenTest extends TestCase
     public function instantiating_with_an_empty_secret_throws_exception()
     {
         $this->expectException(InvalidArgumentException::class);
-        $token = new Token("", "foobarToken");
+        new Token("", "foobarToken");
     }
 
     /**
@@ -23,7 +23,7 @@ class TokenTest extends TestCase
     public function instantiating_with_an_empty_response_token_throws_exception()
     {
         $this->expectException(InvalidArgumentException::class);
-        $token = new Token("foobarSecret", "");
+        new Token("foobarSecret", "");
     }
 
     /**
@@ -32,6 +32,6 @@ class TokenTest extends TestCase
     public function instantiating_with_an_invalid_remote_ip_throws_exception()
     {
         $this->expectException(InvalidArgumentException::class);
-        $token = new Token("foobarSecret", "foobarResponseToken", "");
+        new Token("foobarSecret", "foobarResponseToken", "");
     }
 }

@@ -23,9 +23,9 @@ class Token
     /**
      * The user's remote IP address.
      *
-     * @var string
+     * @var string|null
      */
-    private string $remoteIp;
+    private ?string $remoteIp;
 
     /**
      * Create a new reCAPTCHA instance.
@@ -76,7 +76,7 @@ class Token
     }
 
 
-    private function setRemoteIp(string $remoteIp): void
+    private function setRemoteIp(?string $remoteIp): void
     {
         if (!is_null($remoteIp) && !filter_var($remoteIp, FILTER_VALIDATE_IP)) {
             throw new InvalidArgumentException("The user's remote IP address is not a valid IP address");
@@ -85,9 +85,9 @@ class Token
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function remoteIp(): string
+    public function remoteIp(): ?string
     {
         return $this->remoteIp;
     }
