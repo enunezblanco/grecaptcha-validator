@@ -20,7 +20,6 @@ class CaptchaTest extends TestCase
         parent::setUp();
         $this->token = new Token('foobarSecret', 'foobarResponseToken', '127.0.0.1');
         $this->client = Mockery::mock(Client::class);
-
     }
 
     protected function tearDown(): void
