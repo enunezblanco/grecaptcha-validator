@@ -1,18 +1,30 @@
-name: Create Release on Tag Push
+name: Create Release
+
 on:
   push:
     tags:
       - 'v*.*.*'
+  # Only run on the main branch
+  branches:
+    - main
+
 jobs:
   create_release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          submodules: 'recursive'
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
